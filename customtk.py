@@ -13,7 +13,7 @@ app.title("Golden Ratio")
 
 print(type(app), isinstance(app, tkinterDnD.Tk))
 
-
+#Check for valid input
 def is_valid_input(input_str):
     try:
         int(input_str)
@@ -22,6 +22,7 @@ def is_valid_input(input_str):
         return False
 
 
+#Fibonacci and Golden Ratio
 def calc():
     input_value = entry_1.get()
 
@@ -48,7 +49,6 @@ def calc():
     text_2.insert("insert", "Golden Ratio: \n\n" + "\n".join(map(str, gratio)))
     text_2.configure(state="disabled")  # Make the textbox read-only
 
-
 def clear():
     entry_1.delete(0, 'end')
     text_1.configure(state="normal")
@@ -57,11 +57,6 @@ def clear():
     text_2.configure(state="normal")
     text_2.delete(1.0, "end")
     text_2.configure(state="disabled")
-
-
-def button_callback():
-    print("Button click", combobox_1.get())
-
 
 frame_1 = customtkinter.CTkFrame(master=app)
 frame_1.pack(pady=20, padx=20, fill="both", expand=True)
