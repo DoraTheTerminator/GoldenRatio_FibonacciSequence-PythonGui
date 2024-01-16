@@ -2,18 +2,17 @@ import customtkinter
 import tkinterDnD
 import tkinter.messagebox
 
-# customtkinter.set_ctk_parent_class(tkinterDnD.Tk)
-
-customtkinter.set_appearance_mode("dark")  # Modes: "System" (standard), "Dark", "Light"
-customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
+customtkinter.set_appearance_mode("dark")
+customtkinter.set_default_color_theme("blue")
 
 app = customtkinter.CTk()
-app.geometry("800x600")  # Adjusted the window size
+app.geometry("1200x600")
 app.title("Golden Ratio")
 
 print(type(app), isinstance(app, tkinterDnD.Tk))
 
-#Check for valid input
+
+# Check for valid input
 def is_valid_input(input_str):
     try:
         int(input_str)
@@ -22,16 +21,19 @@ def is_valid_input(input_str):
         return False
 
 
-#Fibonacci and Golden Ratio
+# Fibonacci and Golden Ratio calculation function
 def calc():
     input_value = entry_1.get()
 
+    # Shows an error using the previous function
+    # for checking if value is int or not
     if not is_valid_input(input_value):
         tkinter.messagebox.showerror("Error", "Please enter a valid number.")
         return
 
     n = int(input_value)
 
+    #Fibonacci
     fiblist = [0, 1]
     for i in range(0, n):
         fiblist.append(fiblist[i] + fiblist[i + 1])
@@ -42,6 +44,7 @@ def calc():
     text_1.insert("insert", "Fibonacci Series: \n\n" + "\n".join(map(str, fiblist)))
     text_1.configure(state="disabled")  # Make the textbox read-only
 
+    #Golden Ratio
     gratio = [fiblist[i] / float(fiblist[i - 1]) for i in range(2, len(fiblist))]
     output2.set("\n".join(map(str, gratio)))
     text_2.configure(state="normal")  # Enable writing to the textbox
@@ -49,6 +52,8 @@ def calc():
     text_2.insert("insert", "Golden Ratio: \n\n" + "\n".join(map(str, gratio)))
     text_2.configure(state="disabled")  # Make the textbox read-only
 
+
+#Funtion to add a clear button in gui
 def clear():
     entry_1.delete(0, 'end')
     text_1.configure(state="normal")
@@ -57,6 +62,7 @@ def clear():
     text_2.configure(state="normal")
     text_2.delete(1.0, "end")
     text_2.configure(state="disabled")
+
 
 frame_1 = customtkinter.CTkFrame(master=app)
 frame_1.pack(pady=20, padx=20, fill="both", expand=True)
